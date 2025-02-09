@@ -37,7 +37,7 @@ jobs:
       - name: Build binary Linux
         # if: runner.os == 'Linux'
         run: |
-          pyinstaller --onefile --name diags-ubuntu-latest-x86_64 --add-data "resources:resources" main.py
+          pyinstaller --onefile --hidden-import=PIL._tkinter_finder --add-data "resources:resources" main.py
       #
       # - name: Build binary Mac
       #   if: runner.os == 'macOS'
