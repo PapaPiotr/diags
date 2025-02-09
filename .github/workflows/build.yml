@@ -1,4 +1,4 @@
-name: Build Python Binary
+name: Build Python Binaries
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
   pull_request:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # Peut être un problème, on en parle après
+  build-linux:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -17,17 +17,65 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'  # Adapte selon ton projet
+          python-version: '3.10'
 
       - name: Install dependencies
         run: pip install pyinstaller
 
-      - name: Compile script
+      - name: Compile binary
         run: pyinstaller --onefile main.py
 
-      - name: Upload binary
+      - name: Upload Linux binary
         uses: actions/upload-artifact@v4
         with:
-          name: helloworld-binary
+          name: diags-linux
+          path: dist/main
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install pyinstaller
+
+      - name: Compile binary
+        run: pyinstaller --onefile main.py
+
+      - name: Upload Windows binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: diags-windows
+          path: dist/main.exe
+
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install pyinstaller
+
+      - name: Compile binary
+        run: pyinstaller --onefile main.py
+
+      - name: Upload macOS binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: diags-macos
           path: dist/main
 
