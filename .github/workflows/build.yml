@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     name: Build Binaries
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
