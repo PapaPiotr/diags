@@ -36,7 +36,6 @@ jobs:
 
       - name: Build binary Linux
         if: runner.os == 'Linux'
-        '
         run: |
           pyinstaller --onefile --name diags-ubuntu-latest-x86_64 --add-data "resources:resources" main.py
 
