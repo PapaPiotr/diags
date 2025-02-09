@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build Binaries
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
@@ -26,13 +26,14 @@ jobs:
           pip install pyinstaller
           pip install -r requirements.txt
 
-      - name: Build binary Linux
-        if: runner.os == 'Linux'
+      - name: Build binary macOS
+        if: runner.os == 'macOS'
         run: |
-          pyinstaller --windowed --onefile --name diags-linux-x86_64 --hidden-import=PIL._tkinter_finder --add-data "resources:resources" main.py
+          pyinstaller --windowed --onefile --name diags-macos-x86_64 --hidden-import=PIL._tkinter_finder --add-data "resources:resources" main.py
 
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
-          name: binaries-linux
+          name: binaries-macos
           path: dist/*
+
