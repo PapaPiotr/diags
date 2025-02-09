@@ -1,0 +1,51 @@
+name: Build Executables
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    name: Build Binaries
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r requirements.txt
+
+      - name: Build binary Linux
+        if: runner.os == 'Linux'
+        run: |
+          pyinstaller --windowed --onefile --name diags-linux-x86_64 --hidden-import=PIL._tkinter_finder --add-data "resources:resources" main.py
+
+      - name: Build binary macOS
+        if: runner.os == 'macOS'
+        run: |
+          pyinstaller --windowed --onefile --name diags-macos-x86_64 --hidden-import=PIL._tkinter_finder --add-data "resources:resources" main.py
+
+      - name: Build binary Windows
+        if: runner.os == 'Windows'
+        run: |
+          pyinstaller --windowed --onefile --name diags-windows-x86_64 --hidden-import=PIL._tkinter_finder --add-data "resources;resources" main.py
+
+      - name: Upload binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: binaries-${{runner.os}}-x86_64
+          path: dist/*
