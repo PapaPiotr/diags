@@ -1,6 +1,26 @@
+import os
+import sys
 import PIL.Image
 import PIL.ImageTk
 from tkinter import *
+
+# Déterminer le chemin correct pour les ressources
+if getattr(sys, 'frozen', False):
+    # Si le script est exécuté depuis un binaire
+    application_path = sys._MEIPASS  # Répertoire temporaire contenant les ressources
+else:
+    # Si en mode développement
+    application_path = os.path.dirname(__file__)
+aboutPath = os.path.join(application_path, 'resources', 'about.png')
+foldPath = os.path.join(application_path, 'resources', 'fold.png')
+imgPath = os.path.join(application_path, 'resources', 'img.png')
+imgsPath = os.path.join(application_path, 'resources', 'imgs.png')
+newPath = os.path.join(application_path, 'resources', 'new.png')
+saveAsPath = os.path.join(application_path, 'resources', 'saveAs.png')
+savePath = os.path.join(application_path, 'resources', 'save.png')
+settingsPath = os.path.join(application_path, 'resources', 'settings.png')
+aboutPath = os.path.join(application_path, 'resources', 'about.png')
+viewPath = os.path.join(application_path, 'resources', 'view.png')
 
 root = Tk()
 
@@ -98,64 +118,64 @@ root.grid_columnconfigure(1, weight=1)
 toolbar = Frame(root, bd=1, height=30, relief=RAISED)
 toolbar.grid(column=0, row=0, columnspan=5, sticky=NSEW)
 
-imgNew = PIL.Image.open("resources/add-document.png")
-imgNew = imgNew.resize((25,25))
-eNew = PIL.ImageTk.PhotoImage(imgNew)
-newButton = Button(toolbar, image=eNew, relief=FLAT)
+newImg = PIL.Image.open(newPath)
+newImg = newImg.resize((25,25))
+newE = PIL.ImageTk.PhotoImage(newImg)
+newButton = Button(toolbar, image=newE, relief=FLAT)
 newButton.pack(side=LEFT, padx=2, pady=2)
 
-imgFold = PIL.Image.open("resources/folder-open.png")
-imgFold = imgFold.resize((25,25))
-eFold = PIL.ImageTk.PhotoImage(imgFold)
-foldButton = Button(toolbar, image=eFold, relief=FLAT)
+foldImg = PIL.Image.open(foldPath)
+foldImg = foldImg.resize((25,25))
+foldE = PIL.ImageTk.PhotoImage(foldImg)
+foldButton = Button(toolbar, image=foldE, relief=FLAT)
 foldButton.pack(side=LEFT, padx=2, pady=2)
 
-imgView = PIL.Image.open("resources/overview.png")
-imgView = imgView.resize((25,25))
-eView = PIL.ImageTk.PhotoImage(imgView)
-viewButton = Button(toolbar, image=eView, relief=FLAT)
+viewImg = PIL.Image.open(viewPath)
+viewImg = viewImg.resize((25,25))
+viewE = PIL.ImageTk.PhotoImage(viewImg)
+viewButton = Button(toolbar, image=viewE, relief=FLAT)
 viewButton.pack(side=LEFT, padx=2, pady=2)
 
-imgSave = PIL.Image.open("resources/disk.png")
-imgSave = imgSave.resize((25,25))
-eSave = PIL.ImageTk.PhotoImage(imgSave)
-saveButton = Button(toolbar, image=eSave, relief=FLAT)
+saveImg = PIL.Image.open(savePath)
+saveImg = saveImg.resize((25,25))
+saveE = PIL.ImageTk.PhotoImage(saveImg)
+saveButton = Button(toolbar, image=saveE, relief=FLAT)
 saveButton.pack(side=LEFT, padx=2, pady=2)
 
-imgSaveAs = PIL.Image.open("resources/floppy-disk-pen.png")
-imgSaveAs = imgSaveAs.resize((25,25))
-eSaveAs = PIL.ImageTk.PhotoImage(imgSaveAs)
-saveAsButton = Button(toolbar, image=eSaveAs, relief=FLAT)
+saveAsImg = PIL.Image.open(saveAsPath)
+saveAsImg = saveAsImg.resize((25,25))
+saveAsE = PIL.ImageTk.PhotoImage(saveAsImg)
+saveAsButton = Button(toolbar, image=saveAsE, relief=FLAT)
 saveAsButton.pack(side=LEFT, padx=2, pady=2)
 
-imgBinoculars = PIL.Image.open("resources/binoculars.png")
-imgBinoculars = imgBinoculars.resize((25,25))
-eBinoculars = PIL.ImageTk.PhotoImage(imgBinoculars)
-binocularsButton = Button(toolbar, image=eBinoculars, relief=FLAT)
-binocularsButton.pack(side=LEFT, padx=2, pady=2)
+viewImg = PIL.Image.open(viewPath)
+viewImg = viewImg.resize((25,25))
+viewE = PIL.ImageTk.PhotoImage(viewImg)
+viewButton = Button(toolbar, image=viewE, relief=FLAT)
+viewButton.pack(side=LEFT, padx=2, pady=2)
 
-imgPic = PIL.Image.open("resources/picture.png")
-imgPic = imgPic.resize((25,25))
-ePic = PIL.ImageTk.PhotoImage(imgPic)
-picButton = Button(toolbar, image=ePic, relief=FLAT)
-picButton.pack(side=LEFT, padx=2, pady=2)
+imgImg = PIL.Image.open(imgPath)
+imgImg = imgImg.resize((25,25))
+imgE = PIL.ImageTk.PhotoImage(imgImg)
+imgButton = Button(toolbar, image=imgE, relief=FLAT)
+imgButton.pack(side=LEFT, padx=2, pady=2)
 
-imgImgs = PIL.Image.open("resources/images.png")
-imgImgs = imgImgs.resize((25,25))
-eImgs = PIL.ImageTk.PhotoImage(imgImgs)
-imgsButton = Button(toolbar, image=eImgs, relief=FLAT)
+imgsImg = PIL.Image.open(imgsPath)
+imgsImg = imgsImg.resize((25,25))
+imgsE = PIL.ImageTk.PhotoImage(imgsImg)
+imgsButton = Button(toolbar, image=imgsE, relief=FLAT)
 imgsButton.pack(side=LEFT, padx=2, pady=2)
 
-imgSettings = PIL.Image.open("resources/settings-sliders.png")
-imgSettings = imgSettings.resize((25,25))
-eSettings = PIL.ImageTk.PhotoImage(imgSettings)
-settingsButton = Button(toolbar, image=eSettings, relief=FLAT)
+settingsImg = PIL.Image.open(settingsPath)
+settingsImg = settingsImg.resize((25,25))
+settingsE = PIL.ImageTk.PhotoImage(settingsImg)
+settingsButton = Button(toolbar, image=settingsE, relief=FLAT)
 settingsButton.pack(side=LEFT, padx=2, pady=2)
 
-imgAbout = PIL.Image.open("resources/comment-info.png")
-imgAbout = imgAbout.resize((25,25))
-eAbout = PIL.ImageTk.PhotoImage(imgAbout)
-aboutButton = Button(toolbar, image=eAbout, relief=FLAT)
+aboutImg = PIL.Image.open(aboutPath)
+aboutImg = aboutImg.resize((25,25))
+aboutE = PIL.ImageTk.PhotoImage(aboutImg)
+aboutButton = Button(toolbar, image=aboutE, relief=FLAT)
 aboutButton.pack(side=LEFT, padx=2, pady=2)
 
 #Formulaire
